@@ -28,7 +28,7 @@ from gi.repository import GSound
 
 
 ICON_NO_MESSAGES = "mail-read-symbolic"
-ICON_NEW_MESSAGES = "/usr/share/icons/Adwaita/scalable/actions/mail-mark-important-symbolic.svg"
+ICON_NEW_MESSAGES =  "mail-unread-symbolic"
 SOUND_PATH = "/usr/share/sounds/freedesktop/stereo/message.oga"
 
 
@@ -179,7 +179,7 @@ class Indicator:
 
 
     def _do_launch_evolution(self):
-        subprocess.run(["/usr/bin/evolution"])
+        subprocess.run(["evolution"])
 
 
     def _play_sound(self):
@@ -204,9 +204,7 @@ class Indicator:
         
 
 def process_exists(cmd_line):
-    """Check si il existe un processus python en cours dans la ligne de commande duquel
-    on trouve le nom de ce fichier
-    """
+   
     pid_list = list()
     ret_val = False
 
