@@ -12,7 +12,7 @@ from imapclient import IMAPClient, SocketTimeout, SEEN
 import email.header
 import time
 
-from config import Config
+from tray.config import Config
 
 
 class AccountChecker(threading.Thread):

@@ -6,7 +6,7 @@ import os
 import configparser
 import secretstorage
 
-from config import Config
+from tray.config import Config
 
 
 class EvolutionAccountsList:

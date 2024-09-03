@@ -9,10 +9,10 @@ import threading
 import time
 
 from imapclient import IMAPClient
-from account_checker import AccountChecker
-from network import Network
+from tray.account_checker import AccountChecker
+from tray.network import Network
 
-from evolution_accounts import EvolutionAccountsList
+from tray.evolution_accounts import EvolutionAccountsList
 
 import gi
 gi.require_version('Gtk', '3.0')
