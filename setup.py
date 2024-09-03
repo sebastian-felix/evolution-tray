@@ -14,12 +14,11 @@ config = {
     'url': 'https://github.com/ricardo-vieira/snapper-gui',
     'download_url': 'https://github.com/ricardo-vieira/snapper-gui',
     'author_email': 'ricardo.vieira@ist.utl.pt',
-    'package_data': {"evolution-tay": ["glade/*.glade",
+    'package_data': {"evolution-tray": ["glade/*.glade",
                                     "icons/*.svg",
                                     "ui/*.ui"]},
-    'data_files': [('share/applications', ['snapper-gui.desktop'])],
     'entry_points': {'console_scripts':
-                         ['evolution-tray = tray.mail-unread:run']}
+                         ['evolution-tray = tray.mail:run']}
 }
 
 setup(**config)

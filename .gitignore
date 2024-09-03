@@ -1,0 +1,4 @@
+build/
+evolution_tray.egg-info/
+tray/__pycache__/
+RECORD
