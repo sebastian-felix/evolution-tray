@@ -1,20 +1,19 @@
 {
   lib,
-  fetchFromGitHub,
   python3,
   python3Packages,
   pkgs,
   gtk3,
   wrapGAppsHook,
   gtksourceview3,
-  evolution,
   gobject-introspection,
+  version,
 }:
 python3Packages.buildPythonApplication {
   pname = "evolution-tray";
-  version = "0.1";
+  inherit version;
 
-  src = "./";
+  src = lib.cleanSource ./.;
 
   nativeBuildInputs = [wrapGAppsHook gobject-introspection];
 
