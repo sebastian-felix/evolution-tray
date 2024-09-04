@@ -1,43 +1,31 @@
 {
-  description = "evolution-tray";
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  description = "A customizable and extensible shell";
 
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # «https://github.com/nix-systems/nix-systems»
+    systems.url = "github:nix-systems/default-linux";
   };
 
-  outputs = inputs @ {
+  outputs = {
     nixpkgs,
     self,
-    ...
-  }:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
+    systems,
+  }: let
+    version = "1.0";
+    genSystems = nixpkgs.lib.genAttrs (import systems);
+    pkgs = genSystems (system: import nixpkgs {inherit system;});
+  in {
+    packages = genSystems (system: let
+      inherit (pkgs.${system}) callPackage;
+    in {
+      default = callPackage ./default.nix {inherit version;};
+      evolution-tray = self.packages.${system}.default;
+    });
 
-      perSystem = {
-        config,
-        pkgs,
-        system,
-        self',
-        ...
-      }: {
-        devShells.default = pkgs.mkShell {
-          packages = [
-            pkgs.alejandra
-            pkgs.git
-            pkgs.nodePackages.prettier
-          ];
-          name = "evolution-tray";
-        };
-
-        formatter = pkgs.alejandra;
-
-        packages = {
-          evolution-tray = pkgs.callPackage ./default.nix {};
-        };
-      };
+    homeManagerModules = {
+      default = self.homeManagerModules.evolution-tray;
     };
+  };
 }
