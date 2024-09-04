@@ -13,19 +13,14 @@
     self,
     systems,
   }: let
-    version = "1.0";
     genSystems = nixpkgs.lib.genAttrs (import systems);
     pkgs = genSystems (system: import nixpkgs {inherit system;});
   in {
     packages = genSystems (system: let
       inherit (pkgs.${system}) callPackage;
     in {
-      default = callPackage ./default.nix {inherit version;};
+      default = callPackage ./default.nix {};
       evolution-tray = self.packages.${system}.default;
     });
-
-    homeManagerModules = {
-      default = self.homeManagerModules.evolution-tray;
-    };
   };
 }

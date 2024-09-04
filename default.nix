@@ -7,11 +7,10 @@
   wrapGAppsHook,
   gtksourceview3,
   gobject-introspection,
-  version,
 }:
 python3Packages.buildPythonApplication {
   pname = "evolution-tray";
-  inherit version;
+  version = "0.0.0";
 
   src = lib.cleanSource ./.;
 
