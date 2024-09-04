@@ -20,7 +20,7 @@
     packages = genSystems (system: let
       inherit (pkgs.${system}) callPackage;
     in {
-      default = callPackage ./default.nix {inherit version;};
+      default = callPackage ./default.nix;
       evolution-tray = self.packages.${system}.default;
     });
 
